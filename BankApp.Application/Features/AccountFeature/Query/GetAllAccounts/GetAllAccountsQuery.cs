@@ -8,6 +8,6 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Query.GetAllAccounts
 {
-    public record GetAllAccountsQuery():IRequest<IEnumerable<Account>>;
+    public record GetAllAccountsQuery():IRequest<IEnumerable<Accounts>>;
     
 }

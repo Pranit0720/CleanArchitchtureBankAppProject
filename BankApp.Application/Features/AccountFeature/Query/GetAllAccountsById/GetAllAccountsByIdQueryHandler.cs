@@ -10,17 +10,24 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Query.GetAllAccountsById
 {
-    internal class GetAllAccountsByIdQueryHandler : IRequestHandler<GetAllAccountsByIdQuery, IEnumerable<Account>>
+    internal class GetAllAccountsByIdQueryHandler : IRequestHandler<GetAllAccountsByIdQuery, Accounts>
     {
         readonly IAccountRepository _accountRepository;
         public GetAllAccountsByIdQueryHandler(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
-        public async Task<IEnumerable<Account>> Handle(GetAllAccountsByIdQuery request, CancellationToken cancellationToken)
+
+        public async Task<Accounts> Handle(GetAllAccountsByIdQuery request, CancellationToken cancellationToken)
         {
             var GetAllAccountById = await _accountRepository.GetAccountByIdAsync(request.id);
             return GetAllAccountById;
         }
+
+
+
+
+
+
     }
 }

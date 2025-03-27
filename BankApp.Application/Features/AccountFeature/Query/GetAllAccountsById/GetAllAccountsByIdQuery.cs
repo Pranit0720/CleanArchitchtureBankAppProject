@@ -8,5 +8,5 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Query.GetAllAccountsById
 {
-    internal class GetAllAccountsByIdQuery:IRequest<IEnumerable<Account>>;
+    public record GetAllAccountsByIdQuery(int id):IRequest<Accounts>;
 }

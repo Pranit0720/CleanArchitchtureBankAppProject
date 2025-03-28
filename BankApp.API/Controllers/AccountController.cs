@@ -34,7 +34,7 @@ namespace BankApp.API.Controllers
             return Ok(account);
         }
         [HttpPost("AddAccount")]
-        public async Task<IActionResult> AddAccount(Accounts accounts)
+        public async Task<IActionResult> AddAccount(AccountAddModel accounts)
         {
             var account = await _iMediatR.Send(new AddAccountQuery(accounts));
             return Ok(account);

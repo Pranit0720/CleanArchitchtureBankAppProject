@@ -31,11 +31,11 @@ namespace BankApp.Infrstructure.Repository
 
         }
 
-        public async Task<Accounts> AddAccountAsync(Accounts accounts)
+        public async Task<AccountAddModel> AddAccountAsync(AccountAddModel accounts)
         {
             var addAccount = new Accounts
             {
-                UserId = accounts.UserId,
+                UserId = "1",
                 AccountNumber = accounts.AccountNumber,
                 Balance = accounts.Balance,
                 AccountTypes = accounts.AccountTypes,
@@ -44,7 +44,7 @@ namespace BankApp.Infrstructure.Repository
             };
             await _bankDBContext.Account.AddAsync(addAccount);
             await _bankDBContext.SaveChangesAsync();
-            return addAccount;
+            return accounts;
         }
 
         public async Task<int> DeleteAccountAsync(int accountId)

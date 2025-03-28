@@ -13,7 +13,7 @@ namespace BankApp.Application.Interfaces
     {
         Task<IEnumerable<Accounts>> GetAllAccounts();
         Task<Accounts> GetAccountByIdAsync(int id);  
-        Task<Accounts> AddAccountAsync(Accounts accounts);
+        Task<AccountAddModel> AddAccountAsync(AccountAddModel accounts);
         Task<int> UpdateAccountAsync( int id,AccountUpdateModel accounts);
         Task<int> DeleteAccountAsync(int accountId);
     }

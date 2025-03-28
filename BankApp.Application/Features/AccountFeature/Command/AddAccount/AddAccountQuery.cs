@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BankApp.Application.ViewModels.AccountViewModels;
 using BankApp.Domain;
 using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Command.AddAccount
 {
-    public record AddAccountQuery(Accounts Accounts):IRequest<Accounts>;
+    public record AddAccountQuery(AccountAddModel Accounts):IRequest<AccountAddModel>;
     
 }

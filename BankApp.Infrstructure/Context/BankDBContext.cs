@@ -11,7 +11,7 @@ using Microsoft.Identity.Client;
 
 namespace BankApp.Infrastructure.Context
 {
-    internal class BankDBContext:DbContext
+    internal class BankDBContext:IdentityDbContext
     {
         public BankDBContext(DbContextOptions<BankDBContext>options):base(options)
         {

@@ -17,6 +17,8 @@ namespace BankApp.Domain
         public int Id { get; set; }
         [Required]
         public int AccountId { get; set; }
+
+        [ForeignKey("AccountId")]
         public Accounts Accounts { get; set; }
         [Required]
         public TransactionTypes TransactionType { get; set; }

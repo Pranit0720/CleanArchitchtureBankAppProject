@@ -16,8 +16,9 @@ namespace BankApp.Domain
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
-        public string UserId { get; set; }=string.Empty;
-        public Users Users { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        [ForeignKey("UserId")]
+        public Users? Users { get; set; }
         [Required]
         public long AccountNumber { get; set; }
         [Required]
@@ -25,7 +26,7 @@ namespace BankApp.Domain
         [Required]
         public AccountTypes AccountTypes { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; }
-        public ICollection<Transactions> Transactions { get; set; } 
+        public DateTime CreatedDate { get; set; }= DateTime.Now;
+        public ICollection<Transactions>? Transactions { get; set; }
     }
 }

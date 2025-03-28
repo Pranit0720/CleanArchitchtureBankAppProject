@@ -9,7 +9,7 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Query.GetAllAccounts
 {
-    internal class GetAllAccountsQueryHandler : IRequestHandler<GetAllAccountsQuery, IEnumerable<Accounts>>
+    public class GetAllAccountsQueryHandler : IRequestHandler<GetAllAccountsQuery, IEnumerable<Accounts>>
     {
         readonly IAccountRepository _accountRepository;
         public GetAllAccountsQueryHandler(IAccountRepository accountRepository)

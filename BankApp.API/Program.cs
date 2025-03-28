@@ -1,5 +1,5 @@
 
-
+using BankApp.Application;
 using BankApp.Infrastructure;
 
 namespace BankApp.API
@@ -11,6 +11,7 @@ namespace BankApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddApplicationServices();
             builder.Services.AddInterfaceServices(builder.Configuration);
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

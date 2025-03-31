@@ -9,14 +9,14 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Command.DeleteAccount
 {
-    public class DeleteAccountQueryHandler : IRequestHandler<DeleteAccountQuery, int>
+    public class DeleteAccountCommandHandler : IRequestHandler<DeleteAccountCommand, int>
     {
         readonly IAccountRepository _accountRepository;
-        public DeleteAccountQueryHandler(IAccountRepository accountRepository)
+        public DeleteAccountCommandHandler(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
-        public async Task<int> Handle(DeleteAccountQuery request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteAccountCommand request, CancellationToken cancellationToken)
         {
             var account = await _accountRepository.GetAccountByIdAsync(request.id);
             if(account is  null)

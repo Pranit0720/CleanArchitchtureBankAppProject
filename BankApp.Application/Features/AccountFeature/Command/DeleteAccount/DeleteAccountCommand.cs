@@ -7,6 +7,6 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Command.DeleteAccount
 {
-    public record DeleteAccountQuery(int id):IRequest<int>;
+    public record DeleteAccountCommand(int id):IRequest<int>;
     
 }

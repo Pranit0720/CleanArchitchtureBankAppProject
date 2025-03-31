@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BankApp.Infrastructure.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace BankApp.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class one : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +32,9 @@ namespace BankApp.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -48,20 +53,6 @@ namespace BankApp.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,56 +161,32 @@ namespace BankApp.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Account",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AccountNumber = table.Column<long>(type: "bigint", nullable: false),
-                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    AccountTypes = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Account", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Account_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    { "41776008-6086-1fbf-b923-2879a6680b9a", null, "Administartor", "ADMINISTRATOR" },
+                    { "41886008-6086-1fbf-b923-2879a6680b9a", null, "User", "USER" }
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Transaction",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    TransactionType = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transaction", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Transaction_Account_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Account",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                    { "41776062-6086-1fbf-b923-7879a6680b9a", 0, "1ba13f29-763f-4570-ace9-c1c0da9279c4", "ApplicationUser", "admin@gmail.com", false, "Admin", "System", false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEONx1Cm9f6gOBrR49XmOJmFopqA5GbB4mrSufrVeF1x36cthfF/F/S1AYVPuLxxIUg==", null, false, "57b0cdbc-9a03-4d24-84cd-60147dc6d9d1", false, "admin@gmail.com" },
+                    { "71776062-6086-1fcf-b923-2879a6680b7a", 0, "e6ee8677-8567-4d42-8de3-2dc9d3ec9975", "ApplicationUser", "pranit@gmail.com", false, "Prait", "Patil", false, null, "PRANIT@GMAIL.COM", "PRANIT@GMAIL.COM", "AQAAAAIAAYagAAAAEP26JA46gmV8Z7rwgqNzuKhKpXrHRc0/bFhR0sJ/D5YgveUGTPXZnkl5Sqrk5owV5Q==", null, false, "cd6dc297-39b5-45d5-baf7-416cd4f30142", false, "pranit@gmail.com" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Account_UserId",
-                table: "Account",
-                column: "UserId");
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "41776008-6086-1fbf-b923-2879a6680b9a", "41776062-6086-1fbf-b923-7879a6680b9a" },
+                    { "41886008-6086-1fbf-b923-2879a6680b9a", "71776062-6086-1fcf-b923-2879a6680b7a" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -259,11 +226,6 @@ namespace BankApp.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Transaction_AccountId",
-                table: "Transaction",
-                column: "AccountId");
         }
 
         /// <inheritdoc />
@@ -285,19 +247,10 @@ namespace BankApp.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Transaction");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Account");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

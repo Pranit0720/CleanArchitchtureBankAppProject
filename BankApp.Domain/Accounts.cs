@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BankApp.Domain.Enum;
 
+
 //-Account(Id, UserId, AccountNumber, Balance, AccountType, CreatedDate)
 
 namespace BankApp.Domain
@@ -17,8 +18,7 @@ namespace BankApp.Domain
         public int ID { get; set; }
         [Required]
         public string UserId { get; set; } = string.Empty;
-        [ForeignKey("UserId")]
-        public Users? Users { get; set; }
+        
         [Required]
         public long AccountNumber { get; set; }
         [Required]

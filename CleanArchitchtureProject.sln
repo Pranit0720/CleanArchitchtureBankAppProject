@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankApp.Infrastructure", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankApp.API", "BankApp.API\BankApp.API.csproj", "{D591C1FB-C89F-4B1B-9047-BD10F6EA66C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankApp.Identity", "BankApp.Identity\BankApp.Identity.csproj", "{C53EDE52-E720-4382-B528-43467FA9C8C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{D591C1FB-C89F-4B1B-9047-BD10F6EA66C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D591C1FB-C89F-4B1B-9047-BD10F6EA66C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D591C1FB-C89F-4B1B-9047-BD10F6EA66C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53EDE52-E720-4382-B528-43467FA9C8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53EDE52-E720-4382-B528-43467FA9C8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53EDE52-E720-4382-B528-43467FA9C8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53EDE52-E720-4382-B528-43467FA9C8C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{153DEB6D-70BB-4C02-A2BD-40DA6241755F} = {BE7062D7-EBCE-4780-9388-28285E085E88}
 		{8590EA4F-1CE1-4CC9-B47D-88D2455E4C69} = {B51EAE82-8364-4A70-B501-4F8C088752BB}
 		{D591C1FB-C89F-4B1B-9047-BD10F6EA66C3} = {978CB67D-0E20-47F8-B362-D9429DAE1859}
+		{C53EDE52-E720-4382-B528-43467FA9C8C7} = {B51EAE82-8364-4A70-B501-4F8C088752BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3888CF12-2F55-4A25-9A86-3A158C14DB7C}

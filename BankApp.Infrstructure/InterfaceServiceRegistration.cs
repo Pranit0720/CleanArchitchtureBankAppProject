@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BankApp.Application.Interfaces;
 using BankApp.Infrastructure.Context;
+using BankApp.Infrastructure.Repository;
 using BankApp.Infrstructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,10 +25,11 @@ namespace BankApp.Infrastructure
             });
 
             services.AddScoped<IAccountRepository,AccountRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+
             return services;
 
 
         }
     }
 }
- 

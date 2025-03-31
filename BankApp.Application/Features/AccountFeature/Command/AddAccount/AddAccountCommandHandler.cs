@@ -10,16 +10,16 @@ using MediatR;
 
 namespace BankApp.Application.Features.AccountFeature.Command.AddAccount
 {
-    public class AddAccountQueryHandler : IRequestHandler<AddAccountQuery, AccountAddModel>
+    public class AddAccountCommandHandler : IRequestHandler<AddAccountCommand, AccountAddModel>
     {
         readonly IAccountRepository _accountRepository;
-        public AddAccountQueryHandler(IAccountRepository accountRepository)
+        public AddAccountCommandHandler(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
-        public async Task<AccountAddModel> Handle(AddAccountQuery request, CancellationToken cancellationToken)
+        public async Task<AccountAddModel> Handle(AddAccountCommand request, CancellationToken cancellationToken)
         {
-            var account = await _accountRepository.AddAccountAsync(request.Accounts);
+            var account = await _accountRepository.AddAccountAsync(request.uId,request.Accounts);
             return account;
         }
 

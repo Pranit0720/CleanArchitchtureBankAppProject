@@ -12,7 +12,7 @@ namespace BankApp.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddMediatR(conf => { conf.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()); });
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
     }

@@ -7,8 +7,8 @@ using BankApp.Application.ViewModels.AccountViewModels;
 using BankApp.Domain;
 using MediatR;
 
-namespace BankApp.Application.Features.AccountFeature.Command.AddAccount
+namespace BankApp.Application.Features.AccountFeature.Command.UpdateAccount
 {
-    public record AddAccountQuery(AccountAddModel Accounts):IRequest<AccountAddModel>;
+    public record UpdateAccountCommand(int id,AccountUpdateModel accounts):IRequest<int>;
     
 }

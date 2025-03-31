@@ -1,15 +1,19 @@
-﻿using BankApp.Application.Features.AccountFeature.Command.AddAccount;
+﻿using System.Security.Claims;
+using BankApp.Application.Features.AccountFeature.Command.AddAccount;
 using BankApp.Application.Features.AccountFeature.Command.DeleteAccount;
 using BankApp.Application.Features.AccountFeature.Command.UpdateAccount;
 using BankApp.Application.Features.AccountFeature.Query.GetAllAccounts;
 using BankApp.Application.Features.AccountFeature.Query.GetAllAccountsById;
 using BankApp.Application.ViewModels.AccountViewModels;
 using BankApp.Domain;
+using BankApp.Identity.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankApp.API.Controllers
 {
+    [Authorize(Roles = "Administartor")]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -19,10 +23,11 @@ namespace BankApp.API.Controllers
         {
             _iMediatR = iMediator;
         }
-
-        [HttpGet("GetAllAccounts")]
         
-        public async Task<IActionResult> GetAllAccounts()
+        
+        [HttpGet("GetAllAccounts")]
+
+        public async Task<IActionResult> GetAccountsAsync()
         {
             var allAccounts= await _iMediatR.Send(new GetAllAccountsQuery());
             return Ok(allAccounts);
@@ -33,23 +38,25 @@ namespace BankApp.API.Controllers
             var account = await _iMediatR.Send(new GetAllAccountsByIdQuery(id));
             return Ok(account);
         }
+        //[Authorize(Roles = "User")]
         [HttpPost("AddAccount")]
         public async Task<IActionResult> AddAccount(AccountAddModel accounts)
         {
-            var account = await _iMediatR.Send(new AddAccountQuery(accounts));
+            var userId = User.FindFirstValue("userId");
+            var account = await _iMediatR.Send(new AddAccountCommand(userId, accounts));
             return Ok(account);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(int id)
         {
-            var account = await _iMediatR.Send(new DeleteAccountQuery(id));
+            var account = await _iMediatR.Send(new DeleteAccountCommand(id));
             return Ok(account);
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateAccount(int id,AccountUpdateModel account)
+        public async Task<IActionResult> UpdateAccount([FromQuery]int id,[FromBody]AccountUpdateModel account)
         {
             
-            var accounts = await _iMediatR.Send(new UpdateAccountQuery(id,account));
+            var accounts = await _iMediatR.Send(new UpdateAccountCommand(id,account));
             return Ok(accounts);
         }
 

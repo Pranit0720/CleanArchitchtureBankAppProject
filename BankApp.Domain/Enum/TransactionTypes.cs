@@ -8,8 +8,7 @@ namespace BankApp.Domain.Enum
 {
     public enum TransactionTypes
     {
-        Deposit=1,
-        Withdrawal,
-        Transfer
+        credit=1,
+        Debit
     }
 }

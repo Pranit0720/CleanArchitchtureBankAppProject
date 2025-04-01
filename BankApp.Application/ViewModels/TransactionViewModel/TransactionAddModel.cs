@@ -10,8 +10,8 @@ namespace BankApp.Application.ViewModels.TransactionViewModel
 {
     public class TransactionAddModel
     {
-        [Required]
-        public TransactionTypes TransactionType { get; set; }
+        //[Required]
+        //public TransactionTypes TransactionType { get; set; }
         [Required]
         public decimal Amount { get; set; }
         // Stores additional details about the transaction

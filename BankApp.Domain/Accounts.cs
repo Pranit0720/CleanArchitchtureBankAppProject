@@ -20,6 +20,7 @@ namespace BankApp.Domain
         public string UserId { get; set; } = string.Empty;
         
         [Required]
+        //[MinLength(10,ErrorMessage ="Account number must be 10 digit!!!")]
         public long AccountNumber { get; set; }
         [Required]
         public decimal Balance { get; set; }

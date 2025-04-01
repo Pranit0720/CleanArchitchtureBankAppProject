@@ -21,6 +21,7 @@ namespace BankApp.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors();
             //builder.Services.AddAuthentication();
             //builder.Services.AddAuthorization();
 
@@ -39,7 +40,7 @@ namespace BankApp.API
 
 
             app.UseHttpsRedirection();
-            app.UseRouting();
+            //app.UseRouting();
             app.UseAuthentication();
 
             app.UseAuthorization();

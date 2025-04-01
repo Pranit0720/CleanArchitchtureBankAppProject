@@ -37,7 +37,7 @@ namespace BankApp.Infrstructure.Repository
 
         public async Task<AccountAddModel> AddAccountAsync(string uId, AccountAddModel accounts)
         {
-            //var user = await _userManager.GetUserId();
+            
             var addAccount = new Accounts
             {
                 UserId = uId,

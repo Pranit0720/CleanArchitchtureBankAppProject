@@ -15,6 +15,7 @@ namespace BankApp.Application.Interfaces
         Task<IEnumerable<Transactions>> GetTransactionByAccountIdAsync(int accountId);
         Task<TransactionAddModel> AddTransactionAsync(int accountId,TransactionAddModel transactions);
         Task<int> TransferToAnotherAccountBuAccountNumber(int accountId, TransactionTransferModel transferModel);
+        Task<int> DepositeMoney(int accountId,DepositeAmount deposite);
         //Task<int> UpdateTransactionAsync(int id, Transactions transactions);
         //Task<int> DeleteTransactionAsync(int transactionId);
     }

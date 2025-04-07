@@ -69,6 +69,11 @@ namespace BankApp.Infrastructure.Repository
 
         public async Task<int> TransferToAnotherAccountBuAccountNumber(int accountId, TransactionTransferModel transferModel)
         {
+            if (transferModel.Amount==0)
+            {
+                throw new BadRequestException("Amount ");
+
+            }
             var transaction = new Transactions
             {
                 AccountId = accountId,
@@ -117,6 +122,17 @@ namespace BankApp.Infrastructure.Repository
 
         }
 
+        public async Task<int> DepositeMoney(int accountId,DepositeAmount deposite)
+        {
+            var account = await _bankDBContext.Account.FirstOrDefaultAsync(x => x.ID == accountId);
+            if (account == null)
+            {
+                throw new NotFoundException($"Account Of id={accountId} not found!!!");
+            }
+            account.Balance += deposite.Amount;
+            return await _bankDBContext.SaveChangesAsync();
 
+
+        }
     }
 }

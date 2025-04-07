@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using BankApp.Application.Features.AccountFeature.Query.GetAllAccountsById;
 using BankApp.Application.Features.TransactionFeature.Command.AddTransaction;
+using BankApp.Application.Features.TransactionFeature.Command.Deposite;
 using BankApp.Application.Features.TransactionFeature.Command.TransferTransaction;
 using BankApp.Application.Features.TransactionFeature.Query.GetAllTransactionByAccountId;
 using BankApp.Application.Features.TransactionFeature.Query.GetAllTransactions;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BankApp.API.Controllers
 {
-    [Authorize(Roles ="User")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     
@@ -23,7 +24,7 @@ namespace BankApp.API.Controllers
         {
             _iMediatR = iMediator;
         }
-
+        [Authorize(Roles = "Administartor")]
         [HttpGet("GetAllTransaction")]
         public async Task<IActionResult> GetAllTransactions()
         {
@@ -31,7 +32,7 @@ namespace BankApp.API.Controllers
             return Ok(Transactions);
         }
         [HttpGet("GetByAccountId")]
-        public async Task<IActionResult> GetAllTransactionsByAccountID(int accountId)
+        public async Task<IActionResult> GetAllTransactionsByAccountID([FromQuery]int accountId)
         {
             var transaction= await _iMediatR.Send(new GetAllTransactionByAccountIdQuery(accountId));
             return Ok(transaction);
@@ -48,6 +49,13 @@ namespace BankApp.API.Controllers
         public async Task<IActionResult> TransferAmount([FromQuery] int id, [FromBody] TransactionTransferModel transferModel)
         {
             var transaction = await _iMediatR.Send(new TransferTransactionCommand(id, transferModel));
+            return Ok(transaction);
+        }
+
+        [HttpPost("Deposite")]
+        public async Task<IActionResult> Depositemoney([FromQuery] int id, [FromBody] DepositeAmount transferModel)
+        {
+            var transaction = await _iMediatR.Send(new DepositeCommand(id, transferModel));
             return Ok(transaction);
         }
     }

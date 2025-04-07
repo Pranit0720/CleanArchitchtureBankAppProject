@@ -35,6 +35,28 @@ namespace BankApp.Infrstructure.Repository
             return list;
         }
 
+
+        public async Task<int> DisableAccount(int accountId)
+        {
+            var account = await GetAccountByIdAsync(accountId);
+            if (account != null)
+            {
+                if (account.IsDelete == 1)
+                {
+                    account.IsDelete = 0;
+                    _bankDBContext.Account.Update(account);
+                    return await _bankDBContext.SaveChangesAsync();
+                }
+                else
+                {
+                    account.IsDelete = 1;
+                    _bankDBContext.Account.Update(account);
+                    return await _bankDBContext.SaveChangesAsync();
+                }
+            }
+            return 0;   
+
+        }
         public async Task<AccountAddModel> AddAccountAsync(string uId, AccountAddModel accounts)
         {
             
@@ -44,7 +66,8 @@ namespace BankApp.Infrstructure.Repository
                 AccountNumber = accounts.AccountNumber,
                 Balance = accounts.Balance,
                 AccountTypes = accounts.AccountTypes,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                IsDelete = 1,
 
             };
             await _bankDBContext.Account.AddAsync(addAccount);
@@ -70,7 +93,7 @@ namespace BankApp.Infrstructure.Repository
             {
                 throw new DllNotFoundException($"Account id {id} not found!!");
             }
-            updateaccount.Balance = accounts.Balance;
+            //updateaccount.Balance = accounts.Balance;
             updateaccount.AccountTypes = accounts.AccountTypes;
             _bankDBContext.Account.Update(updateaccount);
             return await _bankDBContext.SaveChangesAsync();

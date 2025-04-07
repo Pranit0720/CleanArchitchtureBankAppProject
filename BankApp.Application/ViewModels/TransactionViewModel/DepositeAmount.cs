@@ -4,14 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BankApp.Domain.Enum;
 
-namespace BankApp.Application.ViewModels.AccountViewModels
+namespace BankApp.Application.ViewModels.TransactionViewModel
 {
-    public class AccountUpdateModel
+    public class DepositeAmount
     {
-        
         [Required]
-        public AccountTypes AccountTypes { get; set; }
+        public int Amount { get; set; }
     }
 }

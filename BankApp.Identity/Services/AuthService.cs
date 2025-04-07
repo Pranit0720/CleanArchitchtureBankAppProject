@@ -66,8 +66,9 @@ namespace BankApp.Identity.Services
                 new Claim(JwtRegisteredClaimNames.Sub,user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
-                new Claim("uid",user.Id.ToString())
-                 
+                new Claim("uid",user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+
 
             }
             .Union(userClaim)

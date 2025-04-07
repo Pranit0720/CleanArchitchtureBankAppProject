@@ -17,6 +17,7 @@ namespace BankApp.Application.Interfaces
         Task<AccountAddModel> AddAccountAsync(string uId,AccountAddModel accounts);
         Task<int> UpdateAccountAsync( int id,AccountUpdateModel accounts);
         Task<int> DeleteAccountAsync(int accountId);
+        Task<int> DisableAccount(int accountId);
     }
 }
  
